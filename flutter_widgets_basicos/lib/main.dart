@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
             ],
           )*/
 
-          Column(
+          /*Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -86,8 +86,29 @@ class MyApp extends StatelessWidget {
               Text('La funcionalidad hot reload de flutter te ayuda a rapido y facil ente experimentar'),
               Text('ejecuta la app desde un editor flutter soportDO')
             ],
-          )
+          )*/
 
+          /*const Image(
+            image: NetworkImage('https://miro.medium.com/max/3200/1*73IgUxPfyXUKZAaIXgutrw.png'),
+          )*/
+
+          /*const Text.rich(
+            TextSpan(
+              text:'Hola',
+              children: <TextSpan>[
+                TextSpan(text: 'Saludos',style: TextStyle(fontStyle: FontStyle.italic)),
+                TextSpan(text: 'FLutter', style: TextStyle(fontWeight: FontWeight.bold))
+
+              ]
+            )
+          )*/
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const <Widget>[
+              
+            ]
+          )
 
         //COPIAR HASTA AAQUI
       )
