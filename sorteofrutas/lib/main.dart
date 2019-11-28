@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,24 +13,6 @@ class MyApp extends StatelessWidget {
               title: Text('Juego de frutas'),
             ),
             body: Center(child: AleatorioWidget())));
-
-    /*Container(
-          padding: EdgeInsets.only(top: 40.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: Image.asset('assets/cereza.png'),
-              ),
-              Expanded(
-                child: Image.asset('assets/frutilla.png'),
-              ),
-              Expanded(
-                child: Image.asset('assets/pinia.png'),
-              ),
-            ],
-          ),
-        ),*/
   }
 }
 
@@ -42,7 +24,7 @@ class AleatorioWidget extends StatefulWidget {
 }
 
 class AleatorioWidgetState extends State<AleatorioWidget> {
-  var list = [
+  var frutas = [
     'assets/cereza.png',
     'assets/frambuesa.png',
     'assets/frutilla.png',
@@ -53,62 +35,68 @@ class AleatorioWidgetState extends State<AleatorioWidget> {
     'assets/uva.png'
   ];
 
-  String imagenuno = '';
-  String imagendos = '';
-  String imagentres = '';
+  int index_1 = 0;
+  int index_2 = 3;
+  int index_3 = 4;
+  int numero = 1;
+  String mensaje = 'Juega';
 
-  String texto = "JUGANDO";
-  int frutauno = 1;
-  int frutados = 1;
-  int frutatres = 1;
   void generarGanador() {
     setState(() {
-      var rnd = new Random();
-      frutauno = rnd.nextInt(7) + 0;
-      frutados = rnd.nextInt(7) + 0;
-      frutatres = rnd.nextInt(7) + 0;
-      if (frutauno == frutados && frutados == frutatres) {
-        texto = "GANADOR";
-        imagenuno = list[frutauno];
-        imagendos = list[frutados];
-        imagentres = list[frutatres];
+      index_1 = generarAleatorio();
+      index_2 = generarAleatorio();
+      index_3 = generarAleatorio();
+      numero++;
+      if (index_1 == index_2 && index_2 == index_3) {
+        mensaje = 'Ganador !!!';
+        numero = 1;
       } else {
-        texto = "SIGE JUGANDO";
+        mensaje = 'Juega';
       }
     });
+  }
+
+  int generarAleatorio() {
+    var rnd = new Random();
+    return rnd.nextInt(7) + 1;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 20.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children:<Widget>[
-          Row(
-            Expanded(
-            child: Image.asset(imagenuno),
-          ),
-          Expanded(
-            child: Image.asset(imagendos),
-          ),
-          Expanded(
-            child: Image.asset(imagentres),
-          ),
-          )
-        ]     ,
-        RaisedButton(
-        child: Text('Generar Ganador'),
-        onPressed: () {
-            generarGanador();
-          },
-        ), 
-         
-        
-
-        
-
-
-      ),
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Column(children: <Widget>[
+              Text('Nro de Intentos $numero ',
+                  style: new TextStyle(fontSize: 20.0)),
+              Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Image.asset(frutas[index_1], height: 100, width: 100),
+                  Image.asset(frutas[index_2], height: 100, width: 100),
+                  Image.asset(frutas[index_3], height: 100, width: 100),
+                ],
+              ),
+              IconButton(
+                icon: Icon(Icons.autorenew),
+                iconSize: 50.0,
+                color: Colors.blueAccent,
+                onPressed: () {
+                  generarGanador();
+                },
+              ),
+              Padding(padding: EdgeInsets.only(bottom: 10.0)),
+              Text(
+                mensaje,
+                style: new TextStyle(fontSize: 20.0),
+              )
+            ])
+          ]),
     );
   }
 }
