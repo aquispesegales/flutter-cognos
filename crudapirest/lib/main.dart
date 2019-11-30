@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import './editar.dart';
 
 void main() {
   runApp(new MaterialApp(
     home: new HomePage(),
+    routes: {
+      'nuevo_alumno':(BuildContext context) => ProductoPage(),
+    },
   ));
 }
 
@@ -39,6 +42,16 @@ class HomePageState extends State<HomePage> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Lista de Alumnos"),
+        actions: <Widget>[
+          IconButton(
+            icon:Icon(Icons.photo_size_select_actual),
+            onPressed: (){},
+          ),
+          IconButton(
+            icon:Icon(Icons.camera_alt),
+            onPressed: (){},
+          )
+        ],
       ),
       body: new ListView.builder(
 
@@ -55,6 +68,14 @@ class HomePageState extends State<HomePage> {
           
         },
       ),
+      floatingActionButton: _crearBoton(),
+    );
+  }
+  _crearBoton(){
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      //backgroundColor: Colors.deepPurple,
+      onPressed: ()=> Navigator.pushNamed(context,'nuevo_alumno'),
     );
   }
 }
